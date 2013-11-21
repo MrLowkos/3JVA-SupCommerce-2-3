@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Create a new session and a "username" attribute in this one.
  * 
  * @author Elka
- * @version 2.2
+ * @version 2.3
  * @since SupCommerce 2.2
  */
 @WebServlet(description = "Servlet To Control Login", urlPatterns = "/login")

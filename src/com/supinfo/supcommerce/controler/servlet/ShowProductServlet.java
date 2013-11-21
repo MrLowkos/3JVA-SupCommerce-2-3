@@ -22,7 +22,7 @@ import com.supinfo.sun.supcommerce.exception.UnknownProductException;
  * use contextPath/showProduct?id=
  * 
  * @author Elka
- * @version 2.2
+ * @version 2.3
  * @since SupCommerce 2.1
  */
 @WebServlet(description = "Servlet To Show A Registered Product By ID", urlPatterns = "/showProduct")
@@ -68,7 +68,7 @@ public class ShowProductServlet extends HttpServlet {
  					+ "<meta charset=\"UTF-8\">"
  					+ "<meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
  					+ "<meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">"
- 					+ "<title>ListProduct - Servlet</title>"
+ 					+ "<title>ShowProduct - Servlet</title>"
  					// CSS bootstrap 3.0
  					+ "<link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css\">"
  					+ "<link rel=\"stylesheet\" href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css\">"					
