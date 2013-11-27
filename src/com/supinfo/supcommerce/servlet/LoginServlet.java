@@ -1,4 +1,4 @@
-package com.supinfo.supcommerce.controler.servlet;
+package com.supinfo.supcommerce.servlet;
 
 import java.io.IOException;
 

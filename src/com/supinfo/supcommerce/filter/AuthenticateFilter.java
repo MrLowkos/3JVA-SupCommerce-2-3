@@ -1,4 +1,4 @@
-package com.supinfo.supcommerce.controler.filter;
+package com.supinfo.supcommerce.filter;
 
 import java.io.IOException;
 
@@ -13,19 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet Filter implementation class AuthenticateFilter Check authentication
+ * <b>AuthenticateFilter</b>
+ * <p>
+ * Check authentication
  * 
  * @author Elka
- * @version 2.3
+ * @version 1.0
  * @since SupCommerce 2.2
  */
-@WebFilter(displayName = "Authenticate", description = "Filter To Check Authentication", urlPatterns = "/auth/*")
+@WebFilter(displayName = "Authenticate", description = "Filter to check authentication", urlPatterns = "/auth/*")
 public class AuthenticateFilter implements Filter {
 	
-	private FilterConfig		filterConfig;
-	private static final String	PARAM_USERNAME_SESSION	= "username";
+	private static final String	USERNAME_SESSION_ATT	= "username";
 	private static final String	LOGIN_VIEW				= "/login.html";
-	private static final String	ROOT_VIEW				= "/";
 	
 	/**
 	 * Default constructor.
@@ -41,7 +41,7 @@ public class AuthenticateFilter implements Filter {
 	}
 	
 	/**
-	 * Filter requested url bind on /auth/...
+	 * Filter requested url bind on /auth/*...
 	 * 
 	 * @param request
 	 *            servlet request
@@ -57,26 +57,14 @@ public class AuthenticateFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
 		
-		// Http protocol only
-		HttpServletRequest httpRequest = null;
-		HttpServletResponse httpResponse = null;
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		
-		// Legitimate cast
-		if (request instanceof HttpServletRequest)
-			httpRequest = (HttpServletRequest) request;
-		if (response instanceof HttpServletResponse)
-			httpResponse = (HttpServletResponse) response;
-		// Unlegitimate cast (original request or response type is not Http)
-		// to force redirection to root page
-		if (httpRequest == null || httpResponse == null)
-			((HttpServletResponse) response).sendRedirect(this.getFilterConfig().getServletContext().getContextPath()
-					+ ROOT_VIEW);
-		
-		// Retrieve username session parameter
-		final Object usernameParam = httpRequest.getSession().getAttribute(PARAM_USERNAME_SESSION);
+		// Retrieve "username" session attribute
+		final Object usernameAtt = httpRequest.getSession().getAttribute(USERNAME_SESSION_ATT);
 		
 		// Username exist in session, user is proprely logged :s password ... MD5 ... session token ???
-		if (usernameParam != null && usernameParam instanceof String)
+		if (usernameAtt != null && usernameAtt instanceof String)
 			// Redirect to next requested chain element
 			chain.doFilter(request, response);
 		else
@@ -90,15 +78,7 @@ public class AuthenticateFilter implements Filter {
 	 */
 	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
-		this.setFilterConfig(fConfig);
-	}
-	
-	public FilterConfig getFilterConfig() {
-		return filterConfig;
-	}
-	
-	public void setFilterConfig(FilterConfig filterConfig) {
-		this.filterConfig = filterConfig;
+		// Do nothing
 	}
 	
 }
